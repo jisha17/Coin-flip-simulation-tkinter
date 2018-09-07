@@ -1,0 +1,68 @@
+from tkinter import*
+import random
+
+root=Tk()
+frame1=Frame(root)
+frame2=Frame(root)
+root.title("Coin Flip Simulation")
+root.configure(background="Orange")
+root.geometry("350x300")
+
+no_of_flips=IntVar()
+
+def coin_toss():
+    head=1
+    toss=0
+    record=[]
+    for digit in range(no_of_flips.get()):
+        flips=random.randint(0,1)
+        if flips==1:
+            print("Head")
+            record.append("Head")
+        else:
+            print("Tail")
+            record.append("Tail")
+            
+    print("Record is:",record)
+    length=len(record)
+    length=length-1
+    result=record[length]
+    
+    heads_count=record.count("Head")
+    print("No of Heads",heads_count)
+    tails_count=record.count("Tail")
+    print("No of Tails",tails_count)
+    
+    label2=Label(frame2,text="Result: ",bg="Red",width=22,font="Bold",anchor=CENTER)
+    label2.grid(row=1,column=1,pady=10)
+    label2=Label(frame2,text=result,bg="Red",fg="Yellow",width=10,font="Italic",anchor=W)
+    label2.grid(row=1,column=2,pady=10)
+    label3=Label(frame2,text="No of Heads appeared: ",bg="Orange",fg="Blue")
+    label3.grid(row=2,column=1,padx=10)
+    label4=Label(frame2,text=heads_count,anchor=W,bg="Orange",fg="Blue")
+    label4.grid(row=2,column=2)
+    label5=Label(frame2,text="No of Tails appeared: ",bg="Orange",fg="Blue")
+    label5.grid(row=4,column=1,padx=10)
+    label6=Label(frame2,text=tails_count,anchor=W,bg="Orange",fg="Blue")
+    label6.grid(row=4,column=2)
+    frame2.configure(background="Orange")
+    frame2.pack()
+
+
+    
+label1=Label(frame1,text="This is a coin flip game")
+label1.configure(font=('Italic',10,'bold'),background="Yellow",fg="Brown",justify=CENTER,width=20)
+label1.pack(fill=X)
+enter_flip_count=Entry(frame1,textvariable=no_of_flips)
+enter_flip_count.focus()
+enter_flip_count.pack(pady=20)
+button1=Button(frame1,text="Start",command=coin_toss)
+button1.configure(width=10,fg="Black")
+button1.pack()
+button1=Button(frame1,text="Close",command=root.destroy)
+button1.configure(width=10,fg="Black")
+button1.pack(pady=10)
+frame1.configure(background="Orange")
+frame1.pack()
+
+root.mainloop()
